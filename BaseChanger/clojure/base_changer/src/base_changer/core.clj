@@ -1,6 +1,6 @@
 (ns base-changer.core)
 
-(defn convert-to-letter [num]
+(defn- convert-to-letter [num]
   (if (> num 9)
     (do
       (cond
@@ -13,7 +13,7 @@
         :otherwise (.throw (Exception. "Please make sure you entered your number correctly"))))
     (str num)))
 
-(defn convert-from-letter 
+(defn- convert-from-letter 
   [letter new-base]
     (if (integer? (read-string letter))
       (read-string letter)
@@ -27,14 +27,14 @@
           (= letter "F") 15
           :otherwise (.throw (Exception. "Please make sure you entered your number correctly"))))))
   
-(defn convert-from-decimal [total new-base new-value]
+(defn- convert-from-decimal [total new-base new-value]
   (if (> total 0)
     (do
       (let [temp (mod total new-base)]
         (recur (quot total new-base) new-base (apply str [(convert-to-letter temp) new-value]))))
     new-value))
 
-(defn convert-to-decimal [old-base new-base old-value]
+(defn- convert-to-decimal [old-base new-base old-value]
   (let [total (atom 0) temp (apply merge (map-indexed array-map (reverse old-value)))]
     (reduce + 
       (map 
