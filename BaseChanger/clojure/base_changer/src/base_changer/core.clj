@@ -27,7 +27,6 @@
           (= letter "F") 15
           :otherwise (.throw (Exception. "Please make sure you entered your number correctly"))))))
   
-
 (defn convert-from-decimal [total new-base new-value]
   (if (> total 0)
     (do
